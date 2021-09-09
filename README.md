@@ -5,7 +5,7 @@
 * model - generates a model and migration file
 * controller - genrates a controller
 * resource - generates a migration, model, and controller, also gives routing.
-* scaffold - generates a migration, model, controller, also gives routing and full restful logic.
+* scaffold - generates a migration, model, controller, also gives routing and full restful logic. (NO USE!)
 
 
 ### Routes
