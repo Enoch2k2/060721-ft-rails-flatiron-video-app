@@ -24,11 +24,12 @@ class VideosController < ApplicationController
     end
   end
 
-  def create
+  def create 
     @video = Video.new(video_params)
     if @video.save
       render json: @video, methods: [:hello], status: :ok
     else
+      # binding.pry
       render json: { errors: @video.errors.full_messages }, status: :unprocessable_entity
     end
   end
