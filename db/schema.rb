@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_08_152906) do
+ActiveRecord::Schema.define(version: 2021_09_16_151155) do
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "video_id", null: false
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+    t.index ["video_id"], name: "index_reviews_on_video_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "videos", force: :cascade do |t|
     t.string "category"
@@ -22,4 +40,6 @@ ActiveRecord::Schema.define(version: 2021_09_08_152906) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "reviews", "users"
+  add_foreign_key "reviews", "videos"
 end

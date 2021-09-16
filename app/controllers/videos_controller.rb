@@ -18,7 +18,7 @@ class VideosController < ApplicationController
 
   def show
     if @video
-      render json: @video, methods: [:hello], status: :ok
+      render json: @video, include: [reviews: { include: [:user] }], methods: [:hello], status: :ok
     else
       render json: { errors: "Your princess is in another castle" }, status: :bad_request
     end

@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
-
+  resources :users
   # custom routes
   get "/videos/movies", to: "videos#movies"
   get "/videos/shows", to: "videos#shows"
 
+  # resources :videos
+  # resources :review, only: [:index]
+
   # ReSTful routes
-  resources :videos
+  resources :videos do
+    resources :reviews, only: [:create]
+  end
+
+  # get "/videos/1/reviews"
+  # post "/videos/1/reviews" # create a review for video 1
 
   # restful routes
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
