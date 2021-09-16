@@ -7,6 +7,8 @@ class Video < ApplicationRecord
   validates_length_of :title, minimum: 8, maximum: 150
   validates_inclusion_of :category, in: ["Movie", "Show"]
 
+  accepts_nested_attributes_for :reviews, reject_if: :all_blank
+
   def hello
     "hello"
   end

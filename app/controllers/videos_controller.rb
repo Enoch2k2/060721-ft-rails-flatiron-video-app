@@ -66,7 +66,8 @@ class VideosController < ApplicationController
         :title,
         :length,
         :genre,
-        :rating
+        :rating,
+        reviews_attributes: [:content, :user_id]
       )
     end
 end
