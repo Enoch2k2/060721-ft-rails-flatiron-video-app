@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   # ReSTful routes
   resources :videos do
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:create, :index]
   end
 
   # get "/videos/1/reviews"

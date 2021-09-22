@@ -1,6 +1,10 @@
 class ReviewsController < ApplicationController
   before_action :set_video
 
+  def index
+    render json: Review.all
+  end
+
   def create
     @review = @video.reviews.build(review_params)
     if @review.save

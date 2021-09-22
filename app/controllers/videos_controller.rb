@@ -2,23 +2,28 @@ class VideosController < ApplicationController
   before_action :set_video, only: [:show, :update, :destroy]
 
   def index
-    @videos = Video.all
-    render json: @videos, methods: [:hello], status: :ok
+    if params[:q]
+      # return json that is searched
+      @videos = Video.where("lower(title) LIKE ?", "%#{params[:q].downcase}%")
+    else
+      @videos = Video.all
+    end
+    render json: @videos, :include => [:reviews => [:user]]
   end
   
   def movies
-    @videos = Video.where(category: "Movie")
-    render json: @videos, methods: [:hello], status: :ok
+    @videos = Video.where(:category => "Movie")
+    render json: @videos
   end
 
   def shows
     @videos = Video.where(category: "Show")
-    render json: @videos, methods: [:hello], status: :ok
+    render json: @videos
   end
 
   def show
     if @video
-      render json: @video, include: [reviews: { include: [:user] }], methods: [:hello], status: :ok
+      render json: @video, include: []
     else
       render json: { errors: "Your princess is in another castle" }, status: :bad_request
     end
