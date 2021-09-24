@@ -1,4 +1,4 @@
-class VideosController < ApplicationController
+class Api::V1::VideosController < ApplicationController
   before_action :set_video, only: [:show, :update, :destroy]
 
   def index
@@ -23,7 +23,7 @@ class VideosController < ApplicationController
 
   def show
     if @video
-      render json: @video, include: []
+      render json: @video, include: [reviews: { include: [:user]}]
     else
       render json: { errors: "Your princess is in another castle" }, status: :bad_request
     end

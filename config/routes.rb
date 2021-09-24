@@ -1,17 +1,22 @@
 Rails.application.routes.draw do
-  resources :users
-  # custom routes
-  get "/videos/movies", to: "videos#movies"
-  get "/videos/shows", to: "videos#shows"
+  namespace :api do
+    namespace :v1 do
+      resources :users, except: [:create]
+      # custom routes
+      get "/videos/movies", to: "videos#movies"
+      get "/videos/shows", to: "videos#shows"
 
-  # resources :videos
-  # resources :review, only: [:index]
+      get '/get-current-user', to: 'users#get_current_user'
+      post '/signup', to: 'users#create'
+      # resources :videos
+      # resources :review, only: [:index]
 
-  # ReSTful routes
-  resources :videos do
-    resources :reviews, only: [:create, :index]
+      # ReSTful routes
+      resources :videos do
+        resources :reviews, only: [:create, :index]
+      end
+    end
   end
-
   # get "/videos/1/reviews"
   # post "/videos/1/reviews" # create a review for video 1
 
