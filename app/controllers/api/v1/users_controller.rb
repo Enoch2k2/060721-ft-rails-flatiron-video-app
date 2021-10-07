@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  skip_before_action :authorized, only: [:create, :get_current_user]
   before_action :set_user, only: [:show]
 
   # signup
@@ -19,9 +19,9 @@ class Api::V1::UsersController < ApplicationController
 
   def get_current_user
     if logged_in?
-      render json: current_user, status: :ok
+      render json: { user: current_user }, status: :ok
     else
-      render json: { message: ["Not Logged In"]}, status: :ok
+      render json: { errors: ["Not Logged In"]}, status: :ok
     end
   end
 

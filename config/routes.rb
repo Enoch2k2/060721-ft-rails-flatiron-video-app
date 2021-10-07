@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
       get '/get-current-user', to: 'users#get_current_user'
       post '/signup', to: 'users#create'
+      post '/login', to: 'sessions#create'
       # resources :videos
       # resources :review, only: [:index]
 
